@@ -16,7 +16,8 @@ function Square(props) {
       super(props);
       this.state = {
         squares: Array(9).fill(null),
-        toggle: true
+        toggle: true,
+        count: 0
       };
     }
 
@@ -26,11 +27,21 @@ function Square(props) {
         return;
       }
       squares [i] = this.state.toggle ? 'X':'O';
-      console.log("Clicked");
-      this.setState({
-        squares: squares, 
-        toggle: !this.state.toggle
-      });
+      if(this.state.count == 8){
+        this.setState({
+          squares: Array(9).fill(null),
+          toggle: true,
+          count: 0
+        });
+      }
+      else {
+        this.setState({
+          squares: squares, 
+          toggle: !this.state.toggle,
+          count: this.state.count += 1
+        });
+      }
+      
     }
 
     renderSquare(i) {
